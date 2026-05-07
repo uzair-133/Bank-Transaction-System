@@ -1,0 +1,61 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    width: 100%;
+    min-height: 100vh;
+}
+.Hcontent{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 6em;
+}
+.Hcontent h1{
+    font-size: clamp(2rem, 5vw, 4.5rem);
+    text-align: center;
+}
+.Hcontent h1 span{
+    display: block;
+    color: royalblue;
+}
+.Hcontent p{
+     font-size: clamp(1rem, 2.5vw, 1.5rem);
+     max-width: 60ch;
+     text-align: center;
+     margin: 0 auto;
+}
+
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap; /* mobile pe stack ho jayenge */
+  padding: 0 1rem;
+  margin-top: 3rem;
+}
+
+.btn a {
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  font-size: clamp(0.9rem, 1vw, 1.1rem);
+  padding: 0.7em 1.5em;
+  border-radius: 0.8rem;
+  transition: 0.2s ease;
+}
+
+.btn1 {
+  background-color: royalblue;
+  color: white;
+}
+
+.btn2 {
+  border: 2px solid black;
+  color: royalblue;
+}

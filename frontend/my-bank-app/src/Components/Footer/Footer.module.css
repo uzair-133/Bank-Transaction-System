@@ -1,0 +1,44 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 100%;
+    overflow-x: hidden;
+    background: #0f172a;
+    color: white;
+    min-height: 18vh;
+    padding: 2.5rem 1rem;
+}
+
+.Fcontent {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+.foot1 h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.Fcontent p {
+    color: #cbd5e1;
+    font-size: 0.9rem;
+}
+
+
+
+
+
+@media (max-width: 768px) {
+    .Fcontent {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+}

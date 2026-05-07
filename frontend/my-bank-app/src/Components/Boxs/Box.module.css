@@ -1,0 +1,26 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.Bcontent {
+    display: grid;
+    /* grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); */
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.Box {
+    background: #0f172a;
+    color: #fff;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    text-align: center;
+}
