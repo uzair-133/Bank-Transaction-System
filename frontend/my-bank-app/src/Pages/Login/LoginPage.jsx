@@ -52,14 +52,25 @@ const LoginPage = () => {
         }
         setError("");
         alert(result.message || "Login Successful!");
-        setFormData({
-          email: "",
-          password: "",
-        });
-       // Simple alert
-        setTimeout(() => {
-          navigate("/");
-        }, 500);
+        try {
+          const accCheck = await fetch("http://localhost:3000/api/accounts/detail", {
+            headers: { "Authorization": `Bearer ${result.token}` }
+          });
+          console.log("Response Status:", accCheck.status);
+          const data = await accCheck.json();
+          console.log("Backend se ye data aya:", data);
+          console.log("Data ki length hai:", data.length);
+          if (accCheck.ok && data.accounts && data.accounts.length > 0) {
+            navigate("/dashboard"); // Agar account pehle se hai
+          } else {
+            navigate("/create-account"); // Agar account nahi hai
+          }
+        } catch (err) {
+          navigate("/create-account"); // Error ki surat mein safe side
+        }
+        // Logic khatam
+
+        setFormData({ email: "", password: "" });
       } else {
         const errorMsg = result.error?.details?.[0]?.message || result.message || "Login fail ho gaya";
         alert(errorMsg);

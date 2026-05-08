@@ -3,6 +3,8 @@ import Navbar from './Components/Navbar/Navbar';
 import LoginPage from './Pages/Login/LoginPage';
 import Register from './Pages/Register/Register';
 import Home from './Pages/Home';
+import DashBoard from './Pages/Dashboard/DashBoard';
+import CreateAccount from './Pages/CreateAccount/CreateAccount';
 const App = () => {
   return (
     <BrowserRouter>
@@ -11,6 +13,8 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/dashboard" element={<DashBoard />} />
+        <Route path="/create-account" element={<CreateAccount />} />
       </Routes>
     </BrowserRouter>
   )
