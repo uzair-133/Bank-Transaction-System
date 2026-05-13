@@ -49,6 +49,7 @@ const LoginPage = () => {
       if (response.ok) {
         if (result.token) {
           localStorage.setItem("token", result.token);
+          localStorage.setItem("userName", result.user.name);
         }
         setError("");
         alert(result.message || "Login Successful!");
