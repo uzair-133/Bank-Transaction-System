@@ -11,7 +11,9 @@ const DashBoard = () => {
 
   const token = localStorage.getItem("token");
   const userName = localStorage.getItem("userName") || "User";
-
+  // const isSystemAdmin = account?.user?.systemUser || localStorage.getItem("isSystemUser") === "true";
+  const isSystemAdmin = localStorage.getItem("isSystemUser") === "true" || account?.user?.systemUser === true;
+  console.log("isSystemAdmin:", isSystemAdmin);
   useEffect(() => {
     // Agar token nahi hai toh login pe wapis
     if (!token) {
@@ -50,8 +52,11 @@ const DashBoard = () => {
           if (ledRes.ok) setLedger(ledData.ledger || []);
 
         } else {
-          // Agar account list empty hai
-          navigate("/create-account");
+          // Agar account list empty hai aur system admin nahi hai
+          if (!isSystemAdmin) {
+            navigate("/create-account");
+          }
+          // System admin ke liye account optional hai
         }
       } catch (err) {
         console.error("Dashboard Fetch Error:", err);
@@ -61,7 +66,7 @@ const DashBoard = () => {
     };
 
     fetchDashboardData();
-  }, [token, navigate]);
+  }, [token, navigate, isSystemAdmin]);
 
   const handleLogout = () => {
     localStorage.clear();
@@ -69,82 +74,100 @@ const DashBoard = () => {
   };
 
   if (loading) return <div className={style.loader}>Updating Balance...</div>;
-
+  console.log("System User check:", account?.user);
   return (
     <>
-    <div className={style.dashboardWrapper}>
-      {/* Sidebar Section */}
-      <aside className={style.sidebar}>
-        <div className={style.sidebarLogo}>
-          <h2>Uk Bank</h2>
-        </div>
-        <ul className={style.sidebarMenu}>
-          <li className={style.active}><Link to="/dashboard">Dashboard</Link></li>
-          <li><Link to="/transfer">Transfer</Link></li>
-        </ul>
-        <div className={style.sidebarFooter}>
-          <button className={style.logoutBtn} onClick={handleLogout}>Logout</button>
-        </div>
-      </aside>
-
-      {/* Main Area */}
-      <main className={style.mainArea}>
-        <header className={style.welcomeHeader}>
-          <div>
-            <h1>Hi, {userName}!</h1>
-            <p><strong>{account?.accountTitle}</strong>'s Account</p>
+      <div className={style.dashboardWrapper}>
+        {/* Sidebar Section */}
+        <aside className={style.sidebar}>
+          <div className={style.sidebarLogo}>
+            <h2>Uk Bank</h2>
           </div>
-          <div className={style.statusBadge}>
-            {account?.status || "ACTIVE"}
+          <ul className={style.sidebarMenu}>
+            <li className={style.active}><Link to="/dashboard">Dashboard</Link></li>
+            <li><Link to="/transfer">Transfer</Link></li>
+          </ul>
+          <div className={style.sidebarFooter}>
+            <button className={style.logoutBtn} onClick={handleLogout}>Logout</button>
           </div>
-        </header>
+        </aside>
 
-        {/* Balance Card */}
-        <section className={style.balanceSection}>
-          <div className={style.balanceCard}>
-            <p className={style.cardLabel}>CURRENT BALANCE</p>
-            <h1 className={style.amount}>
-              {account?.currency || "PKR"} {balance.toLocaleString()}
-            </h1>
-            <div className={style.cardActions}>
-              <button className={style.sendBtn} onClick={() => navigate("/transfer")}>
+        {/* Main Area */}
+        <main className={style.mainArea}>
+          <header className={style.welcomeHeader}>
+            <div>
+              <h1>Hi, {userName}!</h1>
+              <p><strong>{account?.accountTitle || "System Admin"}</strong>'Account</p>
+            </div>
+            <div className={style.statusBadge}>{account?.status || "Active"}</div>
+          </header>
+          {account && (
+            <section className={style.balanceSection}>
+              <div className={style.balanceCard}>
+                <p className={style.cardLabel}>CURRENT BALANCE</p>
+                <h1 className={style.amount}>
+                  {account?.currency || "PKR"} {balance.toLocaleString()}
+                </h1>
+                <div className={style.cardActions}>
+               {!isSystemAdmin && (
+             <button className={style.sendBtn} onClick={() => navigate("/transfer")}>
                 Send Money
               </button>
+               )}   
+             
             </div>
-          </div>
-        </section>
+              </div>
+            </section>
+          )}
+          {/* --- YAHAN LIKHO --- */}
+          {isSystemAdmin && (
+            <section className={style.systemPanel}>
+              <div className={style.adminCard}>
+                <h3>Admin Controls</h3>
+                <p>You have system-level access to deposit cash.</p>
+                <button className={style.depositBtn} onClick={() => navigate("/deposit-cash")}>
+                  + Add Cash to Customer Account
+                </button>
+              </div>
+            </section>
+          )}
 
-        {/* Ledger Section */}
-        <section className={style.ledgerSection}>
-          <div className={style.ledgerHeader}>
-            <h3>Transaction Ledger</h3>
-          </div>
-          <div className={style.ledgerList}>
-            {ledger.length > 0 ? (
-              ledger.map((tx) => (
-                <div key={tx._id} className={style.ledgerItem}>
-                  <div className={style.txLeft}>
-                    <div className={tx.type === "CREDIT" ? style.iconCredit : style.iconDebit}>
-                      {tx.type === "CREDIT" ? "↓" : "↑"}
+        
+         
+
+          {/* Ledger Section - only if account exists */}
+          {account && (
+            <section className={style.ledgerSection}>
+              <div className={style.ledgerHeader}>
+                <h3>Transaction Ledger</h3>
+              </div>
+              <div className={style.ledgerList}>
+                {ledger.length > 0 ? (
+                  ledger.map((tx) => (
+                    <div key={tx._id} className={style.ledgerItem}>
+                      <div className={style.txLeft}>
+                        <div className={tx.type === "CREDIT" ? style.iconCredit : style.iconDebit}>
+                          {tx.type === "CREDIT" ? "↓" : "↑"}
+                        </div>
+                        <div>
+                          <p className={style.txType}>{tx.type === "CREDIT" ? "Money Received" : "Money Sent"}</p>
+                          <small className={style.txId}>TXID: {tx.transaction?.substring(0, 10)}</small>
+                        </div>
+                      </div>
+                      <div className={tx.type === "CREDIT" ? style.creditAmount : style.debitAmount}>
+                        {tx.type === "CREDIT" ? "+" : "-"} {tx.amount.toLocaleString()}
+                      </div>
                     </div>
-                    <div>
-                      <p className={style.txType}>{tx.type === "CREDIT" ? "Money Received" : "Money Sent"}</p>
-                      <small className={style.txId}>TXID: {tx.transaction?.substring(0, 10)}</small>
-                    </div>
-                  </div>
-                  <div className={tx.type === "CREDIT" ? style.creditAmount : style.debitAmount}>
-                    {tx.type === "CREDIT" ? "+" : "-"} {tx.amount.toLocaleString()}
-                  </div>
-                </div>
-              ))
-            ) : (
-              <div className={style.noData}>No transaction history found.</div>
-            )}
-          </div>
-        </section>
-      </main>
-    </div>
-    <Footer />
+                  ))
+                ) : (
+                  <div className={style.noData}>No transaction history found.</div>
+                )}
+              </div>
+            </section>
+          )}
+        </main>
+      </div>
+      <Footer />
     </>
   );
 };

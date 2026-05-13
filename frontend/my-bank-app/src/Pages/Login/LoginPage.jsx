@@ -50,6 +50,7 @@ const LoginPage = () => {
         if (result.token) {
           localStorage.setItem("token", result.token);
           localStorage.setItem("userName", result.user.name);
+          localStorage.setItem("isSystemUser", result.user.systemUser);
         }
         setError("");
         alert(result.message || "Login Successful!");

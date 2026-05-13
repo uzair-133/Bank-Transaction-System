@@ -13,13 +13,14 @@ async function createAccountController(req,res) {
 }
 
 
-async function getUserAccountsController(req,res){
-    const accounts = await accountModel.find({user:req.user._id});
+async function getUserAccountsController(req, res) {
+    // .populate("user") likhna lazmi hai taake ID ki jagah data aaye
+    const accounts = await accountModel.find({ user: req.user._id }).populate("user");
+    
     res.status(200).json({
         accounts
-    })
+    });
 }
-
 async function getAccountBalanceController(req,res){
 
     const {accountId} = req.params;

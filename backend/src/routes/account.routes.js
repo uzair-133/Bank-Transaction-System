@@ -1,7 +1,7 @@
 const express = require("express");
 const authMiddleware = require("../middleware/auth.middleware");
 const accountController = require("../controllers/account.controller");
-
+const Ledger = require("../models/ledger.model")
 const router = express.Router();
 
 /**
@@ -23,4 +23,22 @@ router.get("/detail",authMiddleware.authMiddleware,accountController.getUserAcco
  * -Get /api/accounts/balance/:accountId
  */
 router.get("/balance/:accountId",authMiddleware.authMiddleware,accountController. getAccountBalanceController)
+
+router.get('/ledger/:accountId', async (req, res) => {
+  try {
+    const { accountId } = req.params;
+    
+    // Ledger se data find karo aur latest entries pehle dikhao
+    const history = await Ledger.find({ account: accountId })
+      .sort({ _id: -1 }) // Latest transactions top par
+      .limit(20);
+
+    res.status(200).json({ 
+      success: true, 
+      ledger: history 
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
 module.exports = router;

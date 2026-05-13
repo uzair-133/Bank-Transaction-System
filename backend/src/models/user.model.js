@@ -9,6 +9,7 @@ const userSchema  = new mongoose.Schema({
         match:[/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/],
         unique:[true,"email is already exist"]
     },
+
     name:{
         type:String,
         required:[true,"Name is required for creating an account"]
@@ -21,9 +22,7 @@ const userSchema  = new mongoose.Schema({
     },
     systemUser:{
         type:Boolean,
-        default:false,
-        immutable:true,
-        select: false
+        default:false
     }
 },{
     timestamps:true

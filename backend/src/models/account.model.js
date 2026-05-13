@@ -21,6 +21,9 @@ const accountSchema = new mongoose.Schema({
         },
         default:"ACTIVE"
     },
+    systemUser: {
+         type: Boolean, default: false
+         },
     currency: {
         type:String,
         required:[true,"Currency is required for creating an account"],
@@ -72,7 +75,6 @@ accountSchema.methods.getBalance = async function(){
     return balanceData[0].balance;
 }
 
-const accountModel = mongoose.model("account",accountSchema);
 ///
 accountSchema.pre('validate', async function(next) {
     if (this.isNew && !this.accountTitle) {
@@ -85,6 +87,8 @@ accountSchema.pre('validate', async function(next) {
             return next(error);
         }
     }
-    next();
+    
 });
+const accountModel = mongoose.model("account",accountSchema);
+
 module.exports = accountModel
