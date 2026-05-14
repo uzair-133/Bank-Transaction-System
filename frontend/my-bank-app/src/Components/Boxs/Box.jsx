@@ -1,7 +1,7 @@
 import React from 'react'
 import style from './Box.module.css'
 import { data } from 'react-router-dom'
-const Box = ({number,name}) => {
+const Box = ({ number, name }) => {
     const BoxData = [
         {
             number: "10,000+",
@@ -24,12 +24,12 @@ const Box = ({number,name}) => {
         <>
             <div className={style.container}>
                 <div className={style.Bcontent}>
-                   {BoxData.map((e,index)=> (
-                   <div key={e.index} className={style.Box}>
-                     <h2>{e.number}</h2>
-                     <p>{e.data}</p>
-                    </div>
-                   ))  }
+                    {BoxData.map((e, index) => (
+                        <div key={e.index} className={style.Box}>
+                            <h2>{e.number}</h2>
+                            <p>{e.data}</p>
+                        </div>
+                    ))}
                 </div>
             </div>
 

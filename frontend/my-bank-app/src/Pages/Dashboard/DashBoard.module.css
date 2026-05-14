@@ -1,29 +1,25 @@
-
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
-/* ===== Wrapper ===== */
+
 
 .dashboardWrapper {
   min-height: 100vh;
 
   display: grid;
   grid-template-columns: 260px 1fr;
-
-  /* background: #0f172a; */
   color: black;
 }
 
-/* ===== Sidebar ===== */
 
 .sidebar {
   background: #131c31;
 
   padding: 2rem 1rem;
 
-  border-right: 1px solid rgba(255,255,255,0.08);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .sidebarLogo h2 {
@@ -60,7 +56,7 @@
   color: white;
 }
 
-/* ===== Main Area ===== */
+
 
 .mainArea {
   padding: 2rem;
@@ -68,7 +64,6 @@
   overflow-x: hidden;
 }
 
-/* ===== Welcome Header ===== */
 
 .welcomeHeader {
   margin-bottom: 2rem;
@@ -84,23 +79,20 @@
   margin: 0.3rem 0;
 }
 
-/* ===== Status Badge ===== */
 
 .statusBadge {
   font-size: 0.8rem;
 }
-
-/* ===== Balance Section ===== */
 
 .balanceSection {
   margin-bottom: 2rem;
 }
 
 .balanceCard {
- 
+
   color: #131c31;
 
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 
   border-radius: 1.2rem;
 
@@ -118,7 +110,6 @@
   margin-bottom: 1.5rem;
 }
 
-/* ===== Button ===== */
 
 .sendBtn {
   border: none;
@@ -135,7 +126,6 @@
   font-size: 1rem;
 }
 
-/* ===== Ledger ===== */
 
 .ledgerSection h3 {
   margin-bottom: 1rem;
@@ -150,18 +140,13 @@
 /* ===== Transaction Card ===== */
 
 .ledgerItem {
-color: #131c31;
-
+  color: #131c31;
   border-radius: 1rem;
-
   padding: 1rem;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   gap: 1rem;
-
   flex-wrap: wrap;
 }
 
@@ -188,7 +173,7 @@ color: #131c31;
 }
 
 .noData {
-  color:#131c31;
+  color: #131c31;
 }
 
 /* ===== System Admin Panel ===== */
@@ -241,7 +226,7 @@ color: #131c31;
   .sidebar {
     border-right: none;
 
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
 
   .sidebarMenu {

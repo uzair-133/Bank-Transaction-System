@@ -5,13 +5,13 @@ import Footer from '../../Components/Footer/Footer';
 const DashBoard = () => {
   const navigate = useNavigate();
   const [account, setAccount] = useState(null);
-  const [balance, setBalance] = useState(0); // Numeric value se start karein
+  const [balance, setBalance] = useState(0);
   const [ledger, setLedger] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const token = localStorage.getItem("token");
   const userName = localStorage.getItem("userName") || "User";
-  // const isSystemAdmin = account?.user?.systemUser || localStorage.getItem("isSystemUser") === "true";
+
   const isSystemAdmin = localStorage.getItem("isSystemUser") === "true" || account?.user?.systemUser === true;
   console.log("isSystemAdmin:", isSystemAdmin);
   useEffect(() => {
@@ -56,7 +56,7 @@ const DashBoard = () => {
           if (!isSystemAdmin) {
             navigate("/create-account");
           }
-          // System admin ke liye account optional hai
+
         }
       } catch (err) {
         console.error("Dashboard Fetch Error:", err);
@@ -85,7 +85,7 @@ const DashBoard = () => {
           </div>
           <ul className={style.sidebarMenu}>
             <li className={style.active}><Link to="/dashboard">Dashboard</Link></li>
-            <li><Link to="/transfer">Transfer</Link></li>
+            <li><Link to="/transaction">Transfer</Link></li>
           </ul>
           <div className={style.sidebarFooter}>
             <button className={style.logoutBtn} onClick={handleLogout}>Logout</button>
@@ -109,33 +109,31 @@ const DashBoard = () => {
                   {account?.currency || "PKR"} {balance.toLocaleString()}
                 </h1>
                 <div className={style.cardActions}>
-               {!isSystemAdmin && (
-             <button className={style.sendBtn} onClick={() => navigate("/transfer")}>
-                Send Money
-              </button>
-               )}   
-             
-            </div>
+                  {!isSystemAdmin && (
+                    <button className={style.sendBtn} onClick={() => navigate("/transactions")}>
+                      Send Money
+                    </button>
+                  )}
+
+                </div>
               </div>
             </section>
           )}
-          {/* --- YAHAN LIKHO --- */}
+
+
           {isSystemAdmin && (
             <section className={style.systemPanel}>
               <div className={style.adminCard}>
                 <h3>Admin Controls</h3>
                 <p>You have system-level access to deposit cash.</p>
-                <button className={style.depositBtn} onClick={() => navigate("/deposit-cash")}>
+                <button className={style.depositBtn} onClick={() => navigate("/system")}>
                   + Add Cash to Customer Account
                 </button>
               </div>
             </section>
           )}
 
-        
-         
 
-          {/* Ledger Section - only if account exists */}
           {account && (
             <section className={style.ledgerSection}>
               <div className={style.ledgerHeader}>

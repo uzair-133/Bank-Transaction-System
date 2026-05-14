@@ -4,18 +4,18 @@ import style from './Navbar.module.css'
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false)
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
 
   const token = localStorage.getItem("token");
 
   const userName = localStorage.getItem("userName") || "User";
 
- const toggleMenu = () => setMenuOpen(open => !open)
+  const toggleMenu = () => setMenuOpen(open => !open)
   const closeMenu = () => setMenuOpen(false)
   const handleLogout = async () => {
     try {
-      // Backend Logout API (Optional)
+      // Backend Logout API 
       await fetch("http://localhost:3000/api/auth/logout", {
         method: "POST",
         headers: { "Authorization": `Bearer ${token}` }
@@ -29,7 +29,7 @@ const navigate = useNavigate();
       navigate("/login");
     }
   }
- 
+
 
   return (
 
@@ -66,38 +66,6 @@ const navigate = useNavigate();
         </div>
       </nav>
     </header>
-
-    
-    // <header className={style.header}>
-    //   <nav className={style.navbar}>
-    //     <div className={style.logo}>
-    //       <h2>UkBank</h2>
-    //     </div>
-
-    //     <button
-    //       type="button"
-    //       className={`${style.menuButton} ${menuOpen ? style.menuButtonActive : ''}`}
-    //       onClick={toggleMenu}
-    //       aria-expanded={menuOpen}
-    //       aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
-    //     >
-    //       <span className={style.menuIcon} />
-    //     </button>
-
-    //     <div className={`${style.navContent} ${menuOpen ? style.open : ''}`}>
-    //       <ul className={style.navLinks}>
-    //         <li>
-    //           <Link to="/" onClick={closeMenu}>Home</Link>
-    //         </li>
-    //       </ul>
-
-    //       <div className={style.btnGroup}>
-    //         <Link to="/login" className={style.navButton} onClick={closeMenu}>Login</Link>
-    //         <Link to="/register" className={style.navButton} onClick={closeMenu}>Register</Link>
-    //       </div>
-    //     </div>
-    //   </nav>
-    // </header>
   )
 }
 

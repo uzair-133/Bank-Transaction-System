@@ -22,19 +22,19 @@ const Register = () => {
 
   const HandleSubmit = async (e) => {
     e.preventDefault();
-    if (loading) return; 
+    if (loading) return;
 
     const { name, email, password } = formData;
     if (!formData.name || !formData.email || !formData.password) {
       setError("all fields is required");
-      
+
     }
     else if (formData.password.length < 6) {
       setError("Lenght is too short");
       return
     }
     setError("")
-   setLoading(true)
+    setLoading(true)
 
 
     try {
@@ -66,9 +66,9 @@ const Register = () => {
     } catch (err) {
       alert("Backend server se connection nahi ho raha.");
     }
-     finally {
-  setLoading(false);
-}
+    finally {
+      setLoading(false);
+    }
   }
   return (
     <>
@@ -91,8 +91,6 @@ const Register = () => {
         </div>
       </div>
       <Footer />
-
-
     </>
   )
 }

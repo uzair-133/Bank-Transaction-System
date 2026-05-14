@@ -13,7 +13,7 @@ const CreateAccount = () => {
         method: "POST", // Account banane ke liye POST
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}` // Ye sabse zaroori hai
+          "Authorization": `Bearer ${token}` 
         }
       });
 
@@ -33,7 +33,7 @@ const CreateAccount = () => {
         <h1>Welcome to Uk Bank</h1>
         <p>We are glad to have you here. Please create an account to get started.</p>
         
-        {/* onClick attach kar diya */}
+       
         <button 
           onClick={handleCreateAccount} 
           className={style.AccountBtn}

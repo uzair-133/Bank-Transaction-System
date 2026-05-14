@@ -62,13 +62,15 @@ const LoginPage = () => {
           const data = await accCheck.json();
           console.log("Backend se ye data aya:", data);
           console.log("Data ki length hai:", data.length);
+
           if (accCheck.ok && data.accounts && data.accounts.length > 0) {
+            localStorage.setItem("accountId", data.accounts[0]._id);
             navigate("/dashboard"); // Agar account pehle se hai
           } else {
             navigate("/create-account"); // Agar account nahi hai
           }
         } catch (err) {
-          navigate("/create-account"); // Error ki surat mein safe side
+          navigate("/create-account");
         }
         // Logic khatam
 
