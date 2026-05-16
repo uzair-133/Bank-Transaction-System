@@ -20,7 +20,6 @@ const DashBoard = () => {
       navigate('/login');
       return;
     }
-
     const fetchDashboardData = async () => {
       try {
         // 1. Account Details Check

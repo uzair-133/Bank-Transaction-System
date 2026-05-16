@@ -47,11 +47,11 @@ const Transaction = () => {
       const result = await response.json();
 
       if (response.ok) {
-        alert("Paisa Transfer Ho Gaya!");
+        alert("Transaction Done");
         navigate("/dashboard");
       } else {
         // Backend jo error msg bhej raha hai wo dikhayein
-        alert(result.message || "Transaction fail ho gayi");
+        alert(result.message || "Transaction fail!");
       }
     } catch (err) {
       alert("Server error!");
