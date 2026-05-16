@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import style from './Dashboard.module.css';
+import style from "./DashBoard.module.css";
 import Footer from '../../Components/Footer/Footer';
 const DashBoard = () => {
   const navigate = useNavigate();
