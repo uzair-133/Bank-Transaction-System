@@ -9,7 +9,7 @@ const CreateAccount = () => {
     try {
       const token = localStorage.getItem("token"); // Token uthaya
 
-      const CreateAcc = await fetch("http://localhost:3000/api/accounts/", {
+      const CreateAcc = await fetch("https://bank-transaction-system-amber.vercel.app/api/accounts/", {
         method: "POST", // Account banane ke liye POST
         headers: {
           "Content-Type": "application/json",

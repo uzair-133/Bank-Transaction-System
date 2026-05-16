@@ -36,9 +36,8 @@ const LoginPage = () => {
     setError("")
     setLoading(true)
 
-
     try {
-      const url = "http://localhost:3000/api/auth/login"
+      const url = "https://bank-transaction-system-amber.vercel.app/api/auth/login"
       const response = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -55,7 +54,7 @@ const LoginPage = () => {
         setError("");
         alert(result.message || "Login Successful!");
         try {
-          const accCheck = await fetch("http://localhost:3000/api/accounts/detail", {
+          const accCheck = await fetch("https://bank-transaction-system-amber.vercel.app/api/accounts/detail", {
             headers: { "Authorization": `Bearer ${result.token}` }
           });
           console.log("Response Status:", accCheck.status);

@@ -38,7 +38,7 @@ const Register = () => {
 
 
     try {
-      const url = "http://localhost:3000/api/auth/register"
+      const url = "https://bank-transaction-system-amber.vercel.app/api/auth/register"
       const response = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },

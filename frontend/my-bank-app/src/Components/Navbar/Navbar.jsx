@@ -16,7 +16,7 @@ const Navbar = () => {
   const handleLogout = async () => {
     try {
       // Backend Logout API 
-      await fetch("http://localhost:3000/api/auth/logout", {
+      await fetch("https://bank-transaction-system-amber.vercel.app/api/auth/logout", {
         method: "POST",
         headers: { "Authorization": `Bearer ${token}` }
       });

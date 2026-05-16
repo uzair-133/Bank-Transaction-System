@@ -30,7 +30,7 @@ const Transaction = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/api/transactions/", {
+      const response = await fetch("https://bank-transaction-system-amber.vercel.app/api/transactions/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

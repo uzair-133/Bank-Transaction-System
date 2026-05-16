@@ -24,7 +24,7 @@ const DashBoard = () => {
     const fetchDashboardData = async () => {
       try {
         // 1. Account Details Check
-        const accRes = await fetch("http://localhost:3000/api/accounts/detail", {
+        const accRes = await fetch("https://bank-transaction-system-amber.vercel.app/api/accounts/detail", {
           headers: { "Authorization": `Bearer ${token}` }
         });
         const accData = await accRes.json();
@@ -37,10 +37,10 @@ const DashBoard = () => {
 
           // 2. Parallel Fetch: Balance aur Ledger
           const [balRes, ledRes] = await Promise.all([
-            fetch(`http://localhost:3000/api/accounts/balance/${accId}`, {
+            fetch(`https://bank-transaction-system-amber.vercel.app/api/accounts/balance/${accId}`, {
               headers: { "Authorization": `Bearer ${token}` }
             }),
-            fetch(`http://localhost:3000/api/accounts/ledger/${accId}`, {
+            fetch(`https://bank-transaction-system-amber.vercel.app/api/accounts/ledger/${accId}`, {
               headers: { "Authorization": `Bearer ${token}` }
             })
           ]);
